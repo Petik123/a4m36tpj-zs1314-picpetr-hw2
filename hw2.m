@@ -4,7 +4,7 @@
    Implementation of BOS state. 
    The state is represented by the list of pairs { varName, value }.
 *)
-ClearAll[oneStep];
+ClearAll[oneStep,CAssign];
 initState[] :=
     {}; 
 
@@ -39,16 +39,40 @@ doubleQ[d_]:=NumberQ[d] && Not[IntegerQ[d]]
 (*oneStep[\[Sigma]_,CAssign[varName_String,e_]]:={put[initState[],varName,e],CAssign[varName,e]};
 CAssign[varName_String,e_]:=e;
 *)
+(*oneStep[\[Sigma]_,CAssign[varName_String,e_]]:={CAssign[varName,e],e};
+CAssign[varName_String,e_]:=put[initState[],varName,e];*)
 (*11*)oneStep[\[Sigma]_,COperator[Minus,e_]]:={\[Sigma],-e};
 
 (*12-13*)oneStep[\[Sigma]_,COperator[Not,e_]]:=If[e===0,{\[Sigma],1},{\[Sigma],0}];
 
 (*14*)oneStep[\[Sigma]_,COperator[Plus,{e1_,e2_}]]:={\[Sigma],e1+e2};
-	oneStep[\[Sigma]_,COperator[Plus,{e1_,CAssign[varName_String,e_]}]]:={\[Sigma],e1+{"x",1}};
+	(*oneStep[\[Sigma]_,COperator[Plus,{e1_,CAssign[varName_String,e_]}]]:={\[Sigma],e1+{"x",1}};*)
 
 (*15*)oneStep[\[Sigma]_,COperator[Subtract,{e1_,e2_}]]:={\[Sigma],e1-e2};
 
 (*16*)oneStep[\[Sigma]_,COperator[Times,{e1_,e2_}]]:={\[Sigma],e1*e2};
+
+(*17-18*)oneStep[\[Sigma]_,COperator[Divide,{e1_,e2_}]]:=If[Equal[e2,0],{\[Sigma],$Failed},{\[Sigma],e1/e2}];
+
+(*19-20*)oneStep[\[Sigma]_,COperator[Greater,{e1_,e2_}]]:=If[Greater[e1,e2],{\[Sigma],1},{\[Sigma],0}];
+
+(*21-22*)oneStep[\[Sigma]_,COperator[GreaterEqual,{e1_,e2_}]]:=If[GreaterEqual[e1,e2],{\[Sigma],1},{\[Sigma],0}];
+
+(*23-24*)oneStep[\[Sigma]_,COperator[Less,{e1_,e2_}]]:=If[Less[e1,e2],{\[Sigma],1},{\[Sigma],0}];
+
+(*25-26*)oneStep[\[Sigma]_,COperator[LessEqual,{e1_,e2_}]]:=If[LessEqual[e1,e2],{\[Sigma],1},{\[Sigma],0}];
+
+(*27-28*)oneStep[\[Sigma]_,COperator[Equal,{e1_,e2_}]]:=If[Equal[e1,e2],{\[Sigma],1},{\[Sigma],0}];
+
+(*29-30*)oneStep[\[Sigma]_,COperator[Unequal,{e1_,e2_}]]:=If[Unequal[e1,e2],{\[Sigma],1},{\[Sigma],0}];
+
+(*31-32-33*)oneStep[\[Sigma]_,COperator[And,{e1_,e2_}]]:=If[(e1===0||(e1=!=0&&e2===0)),{\[Sigma],0},{\[Sigma],1}];
+
+(*34-35-36*)oneStep[\[Sigma]_,COperator[Or,{e1_,e2_}]]:=If[(e1=!=0||(e1===0&&e2=!=0)),{\[Sigma],1},{\[Sigma],0}];
+
+
+
+
 
 
 (*Typing System*)
@@ -64,11 +88,13 @@ CAssign[varName_String,e_]:=e;
 (*44*)typeOf[\[CapitalGamma]_,{a:CAssign[var_,e_],stm___}]:={(* YOUR CODE HERE *)};
 
 
-(*program=5;
+(*program=COperator[Plus[0,CAssign["x",1]]];
+(*program=CAssign["x",10];*)
 oneStep[initState[],program]
-put[initState[],"x",10]
-Reap[oneStep[initState[],program]]*)
-
+Reap[oneStep[initState[],program]]
+CAssign["b",15]
+oneStep[initState[],CAssign["h",30]]
+*)
 
 
 
