@@ -46,9 +46,9 @@ CAssign[varName_String,e_]:=e;
 (*14*)oneStep[\[Sigma]_,COperator[Plus,{e1_,e2_}]]:={\[Sigma],e1+e2};
 	oneStep[\[Sigma]_,COperator[Plus,{e1_,CAssign[varName_String,e_]}]]:={\[Sigma],e1+{"x",1}};
 
-(*15*)oneStep[\[Sigma]_,COperator[Subtract,{e1_,e2_}]]:={\[Sigma],e1-e2}
+(*15*)oneStep[\[Sigma]_,COperator[Subtract,{e1_,e2_}]]:={\[Sigma],e1-e2};
 
-(*16*)oneStep[\[Sigma],COperator[Times,{e1_,e2_}]]:=
+(*16*)oneStep[\[Sigma],COperator[Times,{e1_,e2_}]]:={\[Sigma],e1*e2};
 
 
 (*Typing System*)
