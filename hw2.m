@@ -52,7 +52,7 @@ CAssign[varName_String,e_]:=put[initState[],varName,e];*)
 
 (*16*)oneStep[\[Sigma]_,COperator[Times,{e1_,e2_}]]:={\[Sigma],e1*e2};
 
-(*17-18*)oneStep[\[Sigma]_,COperator[Divide,{e1_,e2_}]]:=If[Equal[e2,0],{\[Sigma],$Failed},{\[Sigma],e1/e2}];
+(*17-18*)oneStep[\[Sigma]_,COperator[Divide,{e1_,e2_}]]:=If[Equal[e2,0],{\[Sigma],$Failed},{\[Sigma],Divide[e1,e2]}];
 
 (*19-20*)oneStep[\[Sigma]_,COperator[Greater,{e1_,e2_}]]:=If[Greater[e1,e2],{\[Sigma],1},{\[Sigma],0}];
 
@@ -88,13 +88,13 @@ CAssign[varName_String,e_]:=put[initState[],varName,e];*)
 (*44*)typeOf[\[CapitalGamma]_,{a:CAssign[var_,e_],stm___}]:={(* YOUR CODE HERE *)};
 
 
-(*program=COperator[Plus[0,CAssign["x",1]]];
-(*program=CAssign["x",10];*)
+(*program=COperator[Plus[0,CAssign["x",1]]];*)
+program=COperator[Divide,{14,6}];
 oneStep[initState[],program]
 Reap[oneStep[initState[],program]]
 CAssign["b",15]
 oneStep[initState[],CAssign["h",30]]
-*)
+
 
 
 
