@@ -27,13 +27,13 @@ doubleQ[d_]:=NumberQ[d] && Not[IntegerQ[d]]
 
 (*3*)oneStep[\[Sigma]_,{}]:={\[Sigma],Null};
 
-(*4*)oneStep[\[Sigma]_,{c_,p___}]:=oneStep[\[Sigma],c];
+(*4*)oneStep[\[Sigma]_,{c_,p___}]:=oneStep[#,c]&/@oneStep[\[Sigma],p];
 
 (*5*)oneStep[\[Sigma]_,CDeclare[type_,varName_String]]:={put[initState[],varName,Undefined],Null};
 
 (*8*)oneStep[\[Sigma]_,k_]:={\[Sigma],k};
 
-(*9*)oneStep[\[Sigma]_,varName_String]:={\[Sigma],{get[initState[],varName]}};
+(*9*)oneStep[\[Sigma]_,varName_String]:={\[Sigma],get[initState[],varName]};
 
 (*10*)oneStep[\[Sigma]_,CAssign[varName_String,e_]]:={put[initState[],varName,e],e};
 
