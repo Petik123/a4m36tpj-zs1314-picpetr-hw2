@@ -52,8 +52,7 @@ CAssign[varName_String,e_]:=put[initState[],varName,e];*)
 
 (*16*)oneStep[\[Sigma]_,COperator[Times,{e1_,e2_}]]:={\[Sigma],e1*e2};
 
-(*17-18*)oneStep[\[Sigma]_,COperator[Divide,{e1_Integer,e2_Integer}]]:=If[Equal[e2,0],{\[Sigma],$Failed},{\[Sigma],e1/e2}];
-		oneStep[\[Sigma]_,COperator[Divide,{e1_Real,e2_Real}]]:=If[Equal[e2,0],{\[Sigma],$Failed},{\[Sigma],e1/e2}];
+(*17-18*)oneStep[\[Sigma]_,COperator[Divide,{e1_,e2_}]]:=If[Equal[e2,0],{\[Sigma],$Failed},{\[Sigma],e1/e2}];
 
 (*19-20*)oneStep[\[Sigma]_,COperator[Greater,{e1_,e2_}]]:=If[Greater[e1,e2],{\[Sigma],1},{\[Sigma],0}];
 
