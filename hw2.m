@@ -35,17 +35,20 @@ doubleQ[d_]:=NumberQ[d] && Not[IntegerQ[d]]
 
 (*9*)oneStep[\[Sigma]_,varName_String]:={\[Sigma],get[initState[],varName]};
 
-(*10*)oneStep[\[Sigma]_,CAssign[varName_String,e_]]:={put[initState[],varName,e],e};
+(*(*10*)oneStep[\[Sigma]_,CAssign[varName_String,e_]]:={put[initState[],varName,e],e};*)
+oneStep[\[Sigma]_,CAssign[varName_String,e_]]:={CAssign[varName,e],e};
+CAssign[varName_String,e_]:=put[initState[],varName,e];
 
 (*11*)oneStep[\[Sigma]_,COperator[Minus,e_]]:={\[Sigma],-e};
 
 (*12-13*)oneStep[\[Sigma]_,COperator[Not,e_]]:=If[e===0,{\[Sigma],1},{\[Sigma],0}];
 
-(*14*)oneStep[\[Sigma]_,COperator[Plus,{e1_,e2_}]]:={\[Sigma],e1+e2}
+(*14*)oneStep[\[Sigma]_,COperator[Plus,{e1_,e2_}]]:={\[Sigma],e1+e2};
+	oneStep[\[Sigma]_,COperator[Plus,{e1_,CAssign[varName_String,e_]}]]
 
 (*15*)oneStep[\[Sigma]_,COperator[Subtract,{e1_,e2_}]]:={\[Sigma],e1-e2}
 
-
+(*16*)oneStep[\[Sigma],COperator[Times,{e1_,e2_}]]:=
 
 
 (*Typing System*)
