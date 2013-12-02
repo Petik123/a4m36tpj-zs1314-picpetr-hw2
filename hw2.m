@@ -44,7 +44,7 @@ CAssign[varName_String,e_]:=e;
 (*12-13*)oneStep[\[Sigma]_,COperator[Not,e_]]:=If[e===0,{\[Sigma],1},{\[Sigma],0}];
 
 (*14*)oneStep[\[Sigma]_,COperator[Plus,{e1_,e2_}]]:={\[Sigma],e1+e2};
-	oneStep[\[Sigma]_,COperator[Plus,{e1_,CAssign[varName_String,e_]}]]:={\[Sigma],e1+e};
+	oneStep[\[Sigma]_,COperator[Plus,{e1_,CAssign[varName_String,e_]}]]:={\[Sigma],e1+{"x",1}};
 
 (*15*)oneStep[\[Sigma]_,COperator[Subtract,{e1_,e2_}]]:={\[Sigma],e1-e2}
 
