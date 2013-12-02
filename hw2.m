@@ -33,7 +33,7 @@ doubleQ[d_]:=NumberQ[d] && Not[IntegerQ[d]]
 
 (*8*)oneStep[\[Sigma]_,k_]:={\[Sigma],k};
 
-(*9*)oneStep[\[Sigma]_,varName_String]:={\[Sigma],{get[initState[],varName]};
+(*9*)oneStep[\[Sigma]_,varName_String]:={\[Sigma],{get[initState[],varName]}};
 
 (*10*)oneStep[\[Sigma]_,CAssign[varName_String,e_]]:={put[initState[],varName,e],e};
 
