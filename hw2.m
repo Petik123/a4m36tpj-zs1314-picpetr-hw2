@@ -31,19 +31,19 @@ doubleQ[d_]:=NumberQ[d] && Not[IntegerQ[d]]
 
 (*5*)oneStep[\[Sigma]_,CDeclare[type_,varName_String]]:={put[initState[],varName,Undefined],Null};
 
-(*8*)oneStep[\[Sigma]_,k_Number]:={\[Sigma],k};
+(*8*)oneStep[\[Sigma]_,k_]:={\[Sigma],k};
 
 (*9*)oneStep[\[Sigma]_,varName_String]:={\[Sigma],get[initState[],varName]};
 
-(*10*)oneStep[\[Sigma]_,CAssign[varName_String,e_Number]]:={put[initState[],varName,e],e};
+(*10*)oneStep[\[Sigma]_,CAssign[varName_String,e_]]:={put[initState[],varName,e],e};
 
-(*11*)oneStep[\[Sigma]_,COperator[Minus,e_Number]]:={\[Sigma],-e};
+(*11*)oneStep[\[Sigma]_,COperator[Minus,e_]]:={\[Sigma],-e};
 
-(*12-13*)oneStep[\[Sigma]_,COperator[Not,e_Number]]:=If[e===0,{\[Sigma],1},{\[Sigma],0}];
+(*12-13*)oneStep[\[Sigma]_,COperator[Not,e_]]:=If[e===0,{\[Sigma],1},{\[Sigma],0}];
 
-(*14*)oneStep[\[Sigma]_,COperator[Plus,{e1_Number,e2_Number}]]:={\[Sigma],e1+e2}
+(*14*)oneStep[\[Sigma]_,COperator[Plus,{e1_,e2_}]]:={\[Sigma],e1+e2}
 
-(*15*)oneStep[\[Sigma]_,COperator[Subtract,{e1_Number,e2_Number}]]:={\[Sigma],e1-e2}
+(*15*)oneStep[\[Sigma]_,COperator[Subtract,{e1_,e2_}]]:={\[Sigma],e1-e2}
 
 
 
@@ -61,10 +61,7 @@ doubleQ[d_]:=NumberQ[d] && Not[IntegerQ[d]]
 (*44*)typeOf[\[CapitalGamma]_,{a:CAssign[var_,e_],stm___}]:={(* YOUR CODE HERE *)};
 
 
-program={
-CDeclare["int","i"],
-CAssign["i",0]
-};
+program=5;
 oneStep[initState[],program]
 Reap[oneStep[initState[],program]]
 
