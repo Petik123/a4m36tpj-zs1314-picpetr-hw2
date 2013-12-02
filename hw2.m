@@ -90,12 +90,10 @@ CAssign[varName_String,e_]:=put[initState[],varName,e];*)
 
 
 (*program=COperator[Plus[0,CAssign["x",1]]];*)
-program=COperator[Divide,{6,14}];
+(*program={CAssign["x",10]};
 oneStep[initState[],program]
 Reap[oneStep[initState[],program]]
-CAssign["b",15]
-oneStep[initState[],CAssign["h",30]]
-
+*)
 
 
 
