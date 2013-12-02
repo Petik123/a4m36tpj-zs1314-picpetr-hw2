@@ -48,7 +48,7 @@ CAssign[varName_String,e_]:=e;
 
 (*15*)oneStep[\[Sigma]_,COperator[Subtract,{e1_,e2_}]]:={\[Sigma],e1-e2};
 
-(*16*)oneStep[\[Sigma],COperator[Times,{e1_,e2_}]]:={\[Sigma],e1*e2};
+(*16*)oneStep[\[Sigma]_,COperator[Times,{e1_,e2_}]]:={\[Sigma],e1*e2};
 
 
 (*Typing System*)
