@@ -35,9 +35,9 @@ doubleQ[d_]:=NumberQ[d] && Not[IntegerQ[d]]
 
 (*9*)oneStep[\[Sigma]_,varName_String]:={\[Sigma],get[initState[],varName]};
 
-(*10*)oneStep[\[Sigma]_,CAssign[varName_String,e_]]:={put[initState[],varName,e],e};
-(*oneStep[\[Sigma]_,CAssign[varName_String,e_]]:={put[initState[],varName,e],CAssign[varName,e]};
-CAssign[varName_String,e_]:=e;*)
+(*(*10*)oneStep[\[Sigma]_,CAssign[varName_String,e_]]:={put[initState[],varName,e],e};*)
+oneStep[\[Sigma]_,CAssign[varName_String,e_]]:={put[initState[],varName,e],CAssign[varName,e]};
+CAssign[varName_String,e_]:=e;
 
 (*11*)oneStep[\[Sigma]_,COperator[Minus,e_]]:={\[Sigma],-e};
 
