@@ -6,7 +6,7 @@
 *)
 ClearAll[oneStep,CAssign];
 initState[] :=
-    {}; 
+    {{"x",10}}; 
 
 put[state_, varName_String, value_] :=
     Sow[
@@ -18,8 +18,9 @@ get[state_, varName_String] :=
         Last[First[Cases[state, {varName, _}]]],
         Null
     ];
-intQ[i_]:=IntegerQ[i]
-doubleQ[d_]:=NumberQ[d] && Not[IntegerQ[d]]
+(*intQ[i_]:=IntegerQ[i]*)
+(*doubleQ[d_]:=NumberQ[d] && Not[IntegerQ[d]]*)
+RationalQ[x_] := (Head[x] === Rational)
 
 
 (*Big-Step Operational Semantics*)
@@ -77,10 +78,11 @@ CAssign[varName_String,e_]:=put[initState[],varName,e];*)
 
 
 (*Typing System*)
+(*37*)typeOf[\[CapitalGamma]_,d_?RationalQ]:="double";
+(*38*)typeOf[\[CapitalGamma]_,i_?IntegerQ]:="int";
+(*39*)typeOf[\[CapitalGamma]_,CBlock[{stm___}]]:="command";
 
-(*39*)typeOf[\[CapitalGamma]_,CBlock[{stm___}]]:={(* YOUR CODE HERE *)};
-
-(*40*)typeOf[\[CapitalGamma]_,{}]:={(* YOUR CODE HERE *)};
+(*40*)typeOf[\[CapitalGamma]_,{}]:="command";
 
 (*41*)typeOf[\[CapitalGamma]_,{n_,stm___}]:={(* YOUR CODE HERE *)};
 
@@ -90,10 +92,10 @@ CAssign[varName_String,e_]:=put[initState[],varName,e];*)
 
 
 (*program=COperator[Plus[0,CAssign["x",1]]];*)
-(*program={CAssign["x",10]};
+program="x";
 oneStep[initState[],program]
 Reap[oneStep[initState[],program]]
-*)
+
 
 
 
