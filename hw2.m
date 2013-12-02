@@ -20,7 +20,7 @@ get[state_, varName_String] :=
     ];
 (*intQ[i_]:=IntegerQ[i]*)
 (*doubleQ[d_]:=NumberQ[d] && Not[IntegerQ[d]]*)
-RationalQ[x_] := (Head[x] === Rational)
+RealQ[x_] := (Head[x] === Real);
 
 
 (*Big-Step Operational Semantics*)
@@ -78,7 +78,7 @@ CAssign[varName_String,e_]:=put[initState[],varName,e];*)
 
 
 (*Typing System*)
-(*37*)typeOf[\[CapitalGamma]_,d_?RationalQ]:="double";
+(*37*)typeOf[\[CapitalGamma]_,d_?RealQ]:="double";
 (*38*)typeOf[\[CapitalGamma]_,i_?IntegerQ]:="int";
 (*39*)typeOf[\[CapitalGamma]_,CBlock[{stm___}]]:="command";
 
@@ -92,11 +92,10 @@ CAssign[varName_String,e_]:=put[initState[],varName,e];*)
 
 
 (*program=COperator[Plus[0,CAssign["x",1]]];*)
-program="x";
+(*program="x";
 oneStep[initState[],program]
 Reap[oneStep[initState[],program]]
-
-
+*)
 
 
 
