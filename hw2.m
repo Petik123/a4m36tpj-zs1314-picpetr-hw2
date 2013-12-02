@@ -64,10 +64,10 @@ CAssign[varName_String,e_]:=e;
 (*44*)typeOf[\[CapitalGamma]_,{a:CAssign[var_,e_],stm___}]:={(* YOUR CODE HERE *)};
 
 
-program=5;
+(*program=5;
 oneStep[initState[],program]
 put[initState[],"x",10]
-Reap[oneStep[initState[],program]]
+Reap[oneStep[initState[],program]]*)
 
 
 
