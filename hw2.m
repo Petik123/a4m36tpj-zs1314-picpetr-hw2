@@ -6,7 +6,7 @@
 *)
 ClearAll[oneStep];
 initState[] :=
-    {{"x",10}}; 
+    {}; 
 
 put[state_, varName_String, value_] :=
     Sow[
