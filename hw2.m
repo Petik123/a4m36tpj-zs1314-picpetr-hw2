@@ -6,7 +6,7 @@
 *)
 ClearAll[oneStep,CAssign];
 initState[] :=
-    {{"x",10}}; 
+    {}; 
 
 put[state_, varName_String, value_] :=
     Sow[
@@ -84,11 +84,33 @@ CAssign[varName_String,e_]:=put[initState[],varName,e];*)
 
 (*40*)typeOf[\[CapitalGamma]_,{}]:="command";
 
-(*41*)typeOf[\[CapitalGamma]_,{n_,stm___}]:={(* YOUR CODE HERE *)};
+(*41*)typeOf[\[CapitalGamma]_,{n_,stm___}]:="command";
 
 (*42*)typeOf[\[CapitalGamma]_,CAssign[var_,e_]]:={(* YOUR CODE HERE *)};
 
-(*44*)typeOf[\[CapitalGamma]_,{a:CAssign[var_,e_],stm___}]:={(* YOUR CODE HERE *)};
+(*43*)typeOf[\[CapitalGamma]_,CAssign[var_,e_]]:=If[RealQ[e],"double","int"];
+
+(*44*)typeOf[\[CapitalGamma]_,{a:CAssign[var_,e_],stm___}]:="command";
+
+(*45*)typeOf[\[CapitalGamma]_,CDeclare[type_,var_String]]:="command";
+
+(*46*)typeOf[\[CapitalGamma]_,{CDeclare[type_,var_String],stm___}]:="command";
+
+(*47*)typeOf[\[CapitalGamma]_,CWhile[e_,stm___]]:="command";
+
+(*48*)typeOf[\[CapitalGamma]_,{CWhile[e_,stm___]}]:="command";
+
+(*49*)
+
+(*50*)typeOf[\[CapitalGamma]_,{var_String,stm___}]:="command";
+
+(*51*)typeOf[\[CapitalGamma]_,COperator[unaryOp,e_]]:=If[RealQ[e],"double","int"];
+
+(*52*)typeOf[\[CapitalGamma]_,{COperator[unaryOp,e_]}]:="command";
+
+(*53-54-55*)typeOf[\[CapitalGamma]_,COperator[binaryOp,e1_,e2_]]:=If[RealQ[e1]||RealQ[e2],"double","int"];
+
+(*56*)typeOf[\[CapitalGamma]_,{COperator[binaryOp,e1_,e2_]}]:="command";
 
 
 (*program=COperator[Plus[0,CAssign["x",1]]];*)
